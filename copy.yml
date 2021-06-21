@@ -1,0 +1,11 @@
+---
+- name: Ansible playbook to copy control node file to remote 
+  hosts: all
+  become: true
+  tasks:
+  - name: Copy file
+    copy:
+     src: /opt/ansible/index.html
+     dest: /home/ansadmin
+     owner: john
+     mode: 0600

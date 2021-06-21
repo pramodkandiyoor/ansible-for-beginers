@@ -1,0 +1,28 @@
+---
+- name: This playbook to stop and uninstall httpd
+  hosts: all
+  become: true
+  tasks:
+  - name: Stop service httpd
+    #ansible.builtin.service:
+    service:
+     name: httpd
+     state: stopped
+    when: ansible_os_family == "RedHat"
+  - name: install packages
+    yum:
+      name: httpd
+      state: removed
+    when: ansible_os_family == "RedHat"
+
+  - name: Stop service apache2
+    #ansible.builtin.service:
+    service:
+     name: apache2
+     state: stopped
+    when: ansible_os_family == "Debian"
+  - name: uninstall packages
+    apt:
+      name: apache2
+      state: absent
+    when: ansible_os_family == "Debian"

@@ -1,0 +1,14 @@
+---
+- name: This playbook install apache2 in ubuntu
+  hosts: dbservers
+  become: true
+  tasks:
+  - name: install packages
+    apt:
+      name: apache2
+      state: present
+      
+  - name: Start service apache2, if not started
+    ansible.builtin.service:
+     name: apache2
+     state: started
